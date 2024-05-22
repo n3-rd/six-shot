@@ -1,3 +1,4 @@
+// @ts-expect-error fuck the declaration
 import { JsShell } from 'js-shell-emulator';
 import { commands } from './commands';
 
@@ -24,13 +25,14 @@ export const initShell = async () => {
 	shell = new JsShell('#terminal', {
 		textColor: '#28d751',
 		fontFamily: 'Ubuntu Mono, Monaco, Courier, monospace',
-		promptPS: 'six_shot@portfolio:~$ '
+		promptPS: 'six_shot@portfolio:~$ ',
+		forceFocus: true
 	});
 	shell
 		.setWidth('100%')
 		.setHeight('100vh')
 		.print('Welcome to my personal portfolio.')
-		.print('Type help to see the available commands.')
+		.print('Type "help" to see the available commands.')
 		.newLine();
 
 	let input = '';
@@ -42,6 +44,7 @@ export const initShell = async () => {
 		}
 		const argv = input.split(' ');
 		if (Object.hasOwn(commands, argv[0])) {
+			// @ts-expect-error I don't even have the slightest idea what this is
 			await commands[argv[0]].handler(shell, argv);
 		} else {
 			shell.print(`${argv[0]}: command not found`).newLine();

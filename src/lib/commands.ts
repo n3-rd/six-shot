@@ -1,7 +1,7 @@
 import { projects } from './projects';
 import { roseText, shell } from './utils';
 
-function padToNChars(string, size) {
+function padToNChars(string: string, size: number) {
 	let newString = '';
 	for (let index = 0; index < size - string.length; index++) {
 		newString = newString + ' ';
@@ -16,6 +16,7 @@ export const showHelp = () => {
 	shell.print('| Command       |  Description                               ');
 	shell.print('|---------------|--------------------------------------------');
 	for (const key in commands) {
+		// @ts-expect-error oh no
 		shell.print(`| ${padToNChars(key, 14)}| ${padToNChars(commands[key].description, 43)}|`);
 	}
 	shell.print('--------------------------------------------------------------');
@@ -44,7 +45,7 @@ export const showAbout = () => {
 	});
 };
 
-export const printProject = (project) => {
+export const printProject = (project: { link: string; name: string; description: string }) => {
 	shell.printHTML(
 		`<a class="text-[#0288d1]" href="${project.link}" target="_blank">${project.name}</a> - ${project.description}`
 	);
@@ -77,7 +78,10 @@ export const commands = {
 		description: 'Clear console.'
 	},
 	cd: {
-		handler: (shell, argv) => {
+		handler: (
+			shell: { print: (arg0: string) => void; printHTML: (arg0: string) => void },
+			argv: unknown[]
+		) => {
 			const project = projects.find((project) => project.handler === argv[1]);
 			if (project) {
 				shell.print(`Name: ${project.name}`);
@@ -91,6 +95,6 @@ export const commands = {
 				);
 			}
 		},
-		description: 'cd [dir] Change working directory.'
+		description: 'cd [project] Enter a specific project.'
 	}
 };
