@@ -1,4 +1,5 @@
 <script lang="ts">
+	import PrimaryTags from '$lib/head/PrimaryTags.svelte';
 	import '../app.css';
 	import Lenis from 'lenis';
 	import { onDestroy, onMount } from 'svelte';
@@ -13,6 +14,8 @@
 		requestAnimationFrame(raf);
 	});
 </script>
+
+<PrimaryTags />
 
 <slot></slot>
 
