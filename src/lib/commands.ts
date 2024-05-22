@@ -13,8 +13,8 @@ export const showHelp = () => {
 	shell.printHTML('Here are the available commands\n' + 'Type them in the terminal to use them.\n');
 
 	shell.print('--------------------------------------------------------------');
-	shell.print('| Command       |  Description                               |');
-	shell.print('|---------------|--------------------------------------------|');
+	shell.print('| Command       |  Description                               ');
+	shell.print('|---------------|--------------------------------------------');
 	for (const key in commands) {
 		shell.print(`| ${padToNChars(key, 14)}| ${padToNChars(commands[key].description, 43)}|`);
 	}
@@ -25,10 +25,12 @@ export const showProjects = () => {
 	shell.printHTML('Here are the available commands\n' + 'Type them in the terminal to use them.\n');
 
 	shell.print('--------------------------------------------------------------');
-	shell.print('| Command       |  Description                               |');
-	shell.print('|---------------|--------------------------------------------|');
+	shell.print('| Project       |  Description                               ');
+	shell.print('|---------------|--------------------------------------------');
 	for (const key in projects) {
-		shell.print(`|${projects[key].handler}| ${padToNChars(projects[key].description, 43)}|`);
+		shell.print(
+			`|${padToNChars(projects[key].handler, 15)}| ${padToNChars(projects[key].description, 43)}`
+		);
 		console.log(key);
 	}
 	shell.print('--------------------------------------------------------------');
