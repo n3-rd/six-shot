@@ -23,7 +23,7 @@ export const showHelp = () => {
 };
 
 export const showProjects = () => {
-	shell.printHTML('Here are the available commands\n' + 'Type them in the terminal to use them.\n');
+	shell.printHTML('Here are the available projects\n' + '"cd" into them to view them\n');
 
 	shell.print('--------------------------------------------------------------');
 	shell.print('| Project       |  Description                               ');
@@ -68,6 +68,10 @@ export const commands = {
 		description: 'Open Twitter'
 	},
 	projects: {
+		handler: showProjects,
+		description: 'Show projects'
+	},
+	ls: {
 		handler: showProjects,
 		description: 'Show projects'
 	},
