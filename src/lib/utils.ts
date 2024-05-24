@@ -2,8 +2,13 @@
 import { JsShell } from 'js-shell-emulator';
 import { commands } from './commands';
 
+export const isMobile = () => {
+	return window.innerWidth <= 768;
+};
+
 export const roseText = () => {
-	return `
+	if (!isMobile()) {
+		return `
     
 
     #    /$$$$$$  /$$                           /$$                   /$$    
@@ -16,6 +21,17 @@ export const roseText = () => {
     #   \\______/ |__/|__/  \\__/      |_______/ |__/  |__/ \\______/    \\___/                                                                       
     
     `;
+	} else {
+		return `
+    
+#     _____        ______ __     __ 
+#    / __(_)_ __  / __/ // /__  / /_
+#   _\\ \\/ /\\ \\ / _\\ \\/ _  / _ \\/ __/
+#  /___/_//_\\_\\ /___/_//_/\\___/\\__/ 
+#                                   
+
+    `;
+	}
 };
 
 // @ts-expect-error type cannot be inferred
